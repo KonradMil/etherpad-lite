@@ -185,7 +185,7 @@ var padeditor = (function()
 
       // No font has been previously selected so use the Normal font
       if(normalFont){
-        self.ace.setProperty("textface", "'Helvetica Neue',Arial, sans-serif");
+        self.ace.setProperty("textface", "Ubuntu, sans-serif");
         // $("#viewfontmenu").val("normal");
       }
 
@@ -196,13 +196,6 @@ var padeditor = (function()
       {
         self.ace.destroy();
         self.ace = null;
-      }
-    },
-    enable: function()
-    {
-      if (self.ace)
-      {
-        self.ace.setEditable(true);
       }
     },
     disable: function()

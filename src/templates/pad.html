@@ -36,7 +36,6 @@
 
         <meta charset="utf-8">
         <meta name="robots" content="noindex, nofollow">
-        <meta name="referrer" content="no-referrer">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
         <link rel="shortcut icon" href="<%=settings.faviconPad%>">
 
@@ -57,7 +56,7 @@
         <!-- head and body had been removed intentionally -->
 
         <% e.begin_block("body"); %>
-        <div id="editbar" class="toolbar" title="Toolbar (Alt F9)">
+        <div id="editbar" class="toolbar">
             <div id="overlay">
                 <div id="overlay-inner"></div>
             </div>
@@ -66,6 +65,19 @@
                 <% e.begin_block("editbarMenuLeft"); %>
                 <%- toolbar.menu(settings.toolbar.left, isReadOnly) %>
                 <% e.end_block(); %>
+                <li class="clear"><button class="buttonicon button-color button-color-black" data-id="0" title="Czarny"></button></li>
+                <li><button class="buttonicon button-color button-color-red" data-id="1" title="Czerwony"></button></li>
+                <li class="clear"><button class="buttonicon button-color button-color-green" data-id="2" title="Zielony"></button></li>
+                <li><button class="buttonicon button-color button-color-blue" data-id="3" title="Niebieski"></button></li>
+                <li class="clear mt-9"><label for="options-toc" class="button-toc" title="Spis treści">TC</label></li>
+                <li class="mt-10"><button class="buttonicon button-header" title="Nagłówek">H</button></li>
+                <li class="clear"><button class="buttonicon button-fontsize button-fontsize-12" data-id="fs12" title="Rozmiar mały">T</button></li>
+                <li><button class="buttonicon button-fontsize button-fontsize-16" data-id="fs16" title="Rozmiar średni">T</button></li>
+                <li><button class="buttonicon button-fontsize button-fontsize-20" data-id="fs20" title="Rozmiar duży">T</button></li>
+                <li class="clear"><button class="buttonicon button-fontfamily button-fontfamily-ubuntu" data-id="fontubuntu" title="Styl bezszeryfowy">a</button></li>
+                <li><button class="buttonicon button-fontfamily button-fontfamily-kottaone" data-id="fontkottaone" title="Styl szeryfowy">a</button></li>
+                <li><button class="buttonicon button-fontfamily button-fontfamily-ubuntumono" data-id="fontubuntumono" title="Styl o stałej szerokości">a</button></li>
+                <li class="icon"><label for="options-colorscheck" title="Podświetlenie udziałów"><i class="ep-highlight"></i></label></li>
             </ul>
             <ul class="menu_right" role="toolbar">
                 <% e.begin_block("editbarMenuRight"); %>
@@ -351,21 +363,19 @@
 
         <% e.begin_block("scripts"); %>
         <script type="text/javascript">
-            // @license magnet:?xt=urn:btih:8e4f440f4c65981c5bf93c76d35135ba5064d8b7&dn=apache-2.0.txt
             (function() {
               // Display errors on page load to the user
               // (Gets overridden by padutils.setupGlobalExceptionHandler)
               var originalHandler = window.onerror;
               window.onerror = function(msg, url, line) {
                 var box   = document.getElementById('editorloadingbox');
-                box.innerHTML = '<p><b>An error occurred while loading the pad</b></p>'
+                box.innerHTML = '<p><b>An error occured while loading the pad</b></p>'
                               + '<p><b>'+msg+'</b> '
                               + '<small>in '+ url +' (line '+ line +')</small></p>';
                 // call original error handler
                 if(typeof(originalHandler) == 'function') originalHandler.call(null, arguments);
               };
             })();
-            // @license-end
         </script>
 
         <script type="text/javascript" src="../static/js/require-kernel.js"></script>
@@ -381,7 +391,6 @@
 
         <!-- Bootstrap page -->
         <script type="text/javascript">
-            // @license magnet:?xt=urn:btih:8e4f440f4c65981c5bf93c76d35135ba5064d8b7&dn=apache-2.0.txt
             var clientVars = {};
             (function () {
               var pathComponents = location.pathname.split('/');
@@ -395,6 +404,9 @@
 
               $ = jQuery = require('ep_etherpad-lite/static/js/rjquery').jQuery; // Expose jQuery #HACK
               browser = require('ep_etherpad-lite/static/js/browser');
+              if ((!browser.msie) && (!(browser.mozilla && browser.version.indexOf("1.8.") == 0))) {
+                document.domain = document.domain; // for comet
+              }
 
               var plugins = require('ep_etherpad-lite/static/js/pluginfw/client_plugins');
               var hooks = require('ep_etherpad-lite/static/js/pluginfw/hooks');
@@ -419,8 +431,6 @@
               padeditbar = require('ep_etherpad-lite/static/js/pad_editbar').padeditbar;
               padimpexp = require('ep_etherpad-lite/static/js/pad_impexp').padimpexp;
             }());
-            // @license-end
         </script>
-        <div style="display:none"><a href="/javascript" data-jslicense="1">JavaScript license information</a></div>
         <% e.end_block(); %>
 </html>

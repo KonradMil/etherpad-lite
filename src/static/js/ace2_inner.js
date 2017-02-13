@@ -369,19 +369,6 @@ function Ace2Inner(){
     return thisAuthor;
   }
 
-  var _nonScrollableEditEvents = {
-    "applyChangesToBase": 1
-  };
-
-  _.each(hooks.callAll('aceRegisterNonScrollableEditEvents'), function(eventType) {
-      _nonScrollableEditEvents[eventType] = 1;
-  });
-
-  function isScrollableEditEvent(eventType)
-  {
-    return !_nonScrollableEditEvents[eventType];
-  }
-
   var currentCallStack = null;
 
   function inCallStack(type, action)
@@ -519,7 +506,7 @@ function Ace2Inner(){
           {
             updateBrowserSelectionFromRep();
           }
-          if ((cs.docTextChanged || cs.userChangedSelection) && isScrollableEditEvent(cs.type))
+          if ((cs.docTextChanged || cs.userChangedSelection) && cs.type != "applyChangesToBase")
           {
             scrollSelectionIntoView();
           }
@@ -1455,6 +1442,16 @@ function Ace2Inner(){
     var selection = getSelection();
     p.end();
 
+    function topLevel(n)
+    {
+      if ((!n) || n == root) return null;
+      while (n.parentNode != root)
+      {
+        n = n.parentNode;
+      }
+      return n;
+    }
+
     if (selection)
     {
       var node1 = topLevel(selection.startPoint.node);
@@ -1476,8 +1473,12 @@ function Ace2Inner(){
       var nds = root.getElementsByTagName("style");
       for (var i = 0; i < nds.length; i++)
       {
-        var n = topLevel(nds[i]);
-        if (n && n.parentNode == root)
+        var n = nds[i];
+        while (n.parentNode && n.parentNode != root)
+        {
+          n = n.parentNode;
+        }
+        if (n.parentNode == root)
         {
           observeChangesAroundNode(n);
         }
@@ -1782,9 +1783,9 @@ function Ace2Inner(){
     return !!STYLE_ATTRIBS[aname];
   }
 
-  function isOtherIncorpedAttribute(aname)
+  function isIncorpedAttribute(aname)
   {
-    return !!OTHER_INCORPED_ATTRIBS[aname];
+    return ( !! STYLE_ATTRIBS[aname]) || ( !! OTHER_INCORPED_ATTRIBS[aname]);
   }
 
   function insertDomLines(nodeToAddAfter, infoStructs, isTimeUp)
@@ -2337,17 +2338,8 @@ function Ace2Inner(){
   editorInfo.ace_setAttributeOnSelection = setAttributeOnSelection;
 
 
-  function getAttributeOnSelection(attributeName, prevChar){
+  function getAttributeOnSelection(attributeName){
     if (!(rep.selStart && rep.selEnd)) return
-    var isNotSelection = (rep.selStart[0] == rep.selEnd[0] && rep.selEnd[1] === rep.selStart[1]);
-    if(isNotSelection){
-      if(prevChar){
-        // If it's not the start of the line
-        if(rep.selStart[1] !== 0){
-          rep.selStart[1]--;
-        }
-      }
-    }
 
     var withIt = Changeset.makeAttribsString('+', [
       [attributeName, 'true']
@@ -2526,6 +2518,7 @@ function Ace2Inner(){
 
   function doIncorpLineSplice(startLine, deleteCount, newLineEntries, lineAttribs, hints)
   {
+
     var startOldChar = rep.lines.offsetOfIndex(startLine);
     var endOldChar = rep.lines.offsetOfIndex(startLine + deleteCount);
 
@@ -2759,7 +2752,7 @@ function Ace2Inner(){
   {
     function incorpedAttribFilter(anum)
     {
-      return !isOtherIncorpedAttribute(rep.apool.getAttribKey(anum));
+      return isStyleAttribute(rep.apool.getAttribKey(anum));
     }
 
     function attribRuns(attribs)
@@ -3733,13 +3726,13 @@ function Ace2Inner(){
           firstEditbarElement.focus();
           evt.preventDefault();
         }
-        if ((!specialHandled) && altKey && keyCode == 67 && type === "keydown"){
+        /*if ((!specialHandled) && altKey && keyCode == 67 && type === "keydown"){
           // Alt c focuses on the Chat window
           $(this).blur();
           parent.parent.chat.show();
           parent.parent.$("#chatinput").focus();
           evt.preventDefault();
-        }
+        }*/
         if ((!specialHandled) && evt.ctrlKey && shiftKey && keyCode == 50 && type === "keydown"){
           // Control-Shift-2 shows a gritter popup showing a line author
           var lineNumber = rep.selEnd[0];
@@ -4983,6 +4976,7 @@ function Ace2Inner(){
     $(document).on("keypress", handleKeyEvent);
     $(document).on("keyup", handleKeyEvent);
     $(document).on("click", handleClick);
+
     // Disabled: https://github.com/ether/etherpad-lite/issues/2546
     // Will break OL re-numbering: https://github.com/ether/etherpad-lite/pull/2533
     // $(document).on("cut", handleCut);
@@ -5012,28 +5006,10 @@ function Ace2Inner(){
       });
     })
 
-    // We reference document here, this is because if we don't this will expose a bug
-    // in Google Chrome.  This bug will cause the last character on the last line to
-    // not fire an event when dropped into..
-    $(document).on("drop", function(e){
+
+    $(root).on("drop", function(e){
       if(e.target.a || e.target.localName === "a"){
         e.preventDefault();
-      }
-
-      // Bug fix: when user drags some content and drop it far from its origin, we
-      // need to merge the changes into a single changeset. So mark origin with <style>,
-      // in order to make content be observed by incorporateUserChanges() (see
-      // observeSuspiciousNodes() for more info)
-      var selection = getSelection();
-      if (selection){
-        var firstLineSelected = topLevel(selection.startPoint.node);
-        var lastLineSelected  = topLevel(selection.endPoint.node);
-
-        var lineBeforeSelection = firstLineSelected.previousSibling;
-        var lineAfterSelection  = lastLineSelected.nextSibling;
-
-        var neighbor = lineBeforeSelection || lineAfterSelection;
-        neighbor.appendChild(document.createElement('style'));
       }
 
       // Call drop hook
@@ -5045,22 +5021,13 @@ function Ace2Inner(){
       });
     });
 
+
     // CompositionEvent is not implemented below IE version 8
     if ( !(browser.msie && parseInt(browser.version <= 9)) && document.documentElement)
     {
       $(document.documentElement).on("compositionstart", handleCompositionEvent);
       $(document.documentElement).on("compositionend", handleCompositionEvent);
     }
-  }
-
-  function topLevel(n)
-  {
-    if ((!n) || n == root) return null;
-    while (n.parentNode != root)
-    {
-      n = n.parentNode;
-    }
-    return n;
   }
 
   function handleIEOuterClick(evt)
@@ -5399,12 +5366,6 @@ function Ace2Inner(){
         level = Number(listType[2]);
       }
       var t = getLineListType(n);
-
-      // if already a list, deindent
-      if (allLinesAreList && level != 1) { level = level - 1;  }
-      // if already indented, then add a level of indentation to the list
-      else if (t && !allLinesAreList) { level = level + 1; }
-
       mods.push([n, allLinesAreList ? 'indent' + level : (t ? type + level : type + '1')]);
     }
 
@@ -5458,16 +5419,7 @@ function Ace2Inner(){
           // and the line-numbers don't line up unless we pay
           // attention to where the divs are actually placed...
           // (also: padding on TTs/SPANs in IE...)
-          if (b === doc.body.firstChild) {
-            // It's the first line. For line number alignment purposes, its
-            // height is taken to be the top offset of the next line. If we
-            // didn't do this special case, we would miss out on any top margin
-            // included on the first line. The default stylesheet doesn't add
-            // extra margins, but plugins might.
-            h = b.nextSibling.offsetTop;
-          } else {
-            h = b.nextSibling.offsetTop - b.offsetTop;
-          }
+          h = b.nextSibling.offsetTop - b.offsetTop;
         }
         if (h)
         {

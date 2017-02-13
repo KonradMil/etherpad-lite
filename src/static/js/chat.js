@@ -212,7 +212,7 @@ var chat = (function()
     init: function(pad)
     {
       this._pad = pad;
-      $("#chatinput").on("keydown", function(evt){
+      /*$("#chatinput").on("keydown", function(evt){
         // If the event is Alt C or Escape & we're already in the chat menu
         // Send the users focus back to the pad
         if((evt.altKey == true && evt.which === 67) || evt.which === 27){
@@ -232,7 +232,7 @@ var chat = (function()
           $("#chatinput").focus();
           evt.preventDefault();
         }
-      });
+      });*/
 
       $("#chatinput").keypress(function(evt){
         //if the user typed enter, fire the send

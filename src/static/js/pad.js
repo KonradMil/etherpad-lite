@@ -52,6 +52,43 @@ var hooks = require('./pluginfw/hooks');
 
 var receivedClientVars = false;
 
+function createCookie(name, value, days, path){ /* Warning Internet Explorer doesn't use this it uses the one from pad_utils.js */
+  if (days)
+  {
+    var date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    var expires = "; expires=" + date.toGMTString();
+  }
+  else{
+    var expires = "";
+  }
+  
+  if(!path){ // If the path isn't set then just whack the cookie on the root path
+    path = "/";
+  }
+  
+  //Check if the browser is IE and if so make sure the full path is set in the cookie
+  if((navigator.appName == 'Microsoft Internet Explorer') || ((navigator.appName == 'Netscape') && (new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})").exec(navigator.userAgent) != null))){
+    document.cookie = name + "=" + value + expires + "; path="+document.location;
+  }
+  else{
+    document.cookie = name + "=" + value + expires + "; path=" + path;
+  }
+}
+
+function readCookie(name)
+{
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++)
+  {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
 function randomString()
 {
   var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -84,7 +121,7 @@ var getParameters = [
   { name: "rtl",              checkVal: "true",  callback: function(val) { settings.rtlIsTrue = true } },
   { name: "alwaysShowChat",   checkVal: "true",  callback: function(val) { chat.stickToScreen(); } },
   { name: "chatAndUsers",     checkVal: "true",  callback: function(val) { chat.chatAndUsers(); } },
-  { name: "lang",             checkVal: null,    callback: function(val) { window.html10n.localize([val, 'en']); createCookie('language', val); } }
+  { name: "lang",             checkVal: null,    callback: function(val) { window.html10n.localize([val, 'en']); } }
 ];
 
 function getParams()
@@ -194,27 +231,40 @@ function handshake()
     // Allow deployers to host Etherpad on a non-root path
     'path': exports.baseURL + "socket.io",
     'resource': resource,
-    'reconnectionAttempts': 5,
-    'reconnection' : true,
-    'reconnectionDelay' : 1000,
-    'reconnectionDelayMax' : 5000
+    'max reconnection attempts': 3,
+    'sync disconnect on unload' : false
   });
+
+  var disconnectTimeout;
 
   socket.once('connect', function () {
     sendClientReady(false);
   });
   
   socket.on('reconnect', function () {
+    //reconnect is before the timeout, lets stop the timeout
+    if(disconnectTimeout)
+    {
+      clearTimeout(disconnectTimeout);
+    }
+
     pad.collabClient.setChannelState("CONNECTED");
     pad.sendClientReady(true);
   });
   
-  socket.on('reconnecting', function() {
-    pad.collabClient.setChannelState("RECONNECTING");
-  });
-
-  socket.on('reconnect_failed', function(error) {
-    pad.collabClient.setChannelState("DISCONNECTED", "reconnect_timeout");
+  socket.on('disconnect', function (reason) {
+    if(reason == "booted"){
+      pad.collabClient.setChannelState("DISCONNECTED");
+    } else {
+      function disconnectEvent()
+      {
+        pad.collabClient.setChannelState("DISCONNECTED", "reconnect_timeout");
+      }
+      
+      pad.collabClient.setChannelState("RECONNECTING");
+      
+      disconnectTimeout = setTimeout(disconnectEvent, 20000);
+    }
   });
 
   var initalized = false;
@@ -450,10 +500,10 @@ var pad = {
       handshake();
 
       // To use etherpad you have to allow cookies.
-      // This will check if the prefs-cookie is set.
+      // This will check if the creation of a test-cookie has success.
       // Otherwise it shows up a message to the user.
-      padcookie.init();
-      if (!readCookie("prefs"))
+      createCookie("test", "test");
+      if (!readCookie("test"))
       {
         $('#loading').hide();
         $('#noCookie').show();
@@ -463,6 +513,7 @@ var pad = {
   _afterHandshake: function()
   {
     pad.clientTimeOffset = new Date().getTime() - clientVars.serverTimestamp;
+  
     //initialize the chat
     chat.init(this);
     getParams();
@@ -470,6 +521,11 @@ var pad = {
     padcookie.init(); // initialize the cookies
     pad.initTime = +(new Date());
     pad.padOptions = clientVars.initialOptions;
+
+    if ((!browser.msie) && (!(browser.firefox && browser.version.indexOf("1.8.") == 0)))
+    {
+      document.domain = document.domain; // for comet
+    }
 
     // for IE
     if (browser.msie)
@@ -719,7 +775,6 @@ var pad = {
     var wasConnecting = (padconnectionstatus.getStatus().what == 'connecting');
     if (newState == "CONNECTED")
     {
-      padeditor.enable();
       padconnectionstatus.connected();
     }
     else if (newState == "RECONNECTING")

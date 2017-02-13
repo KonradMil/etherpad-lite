@@ -1,3 +1,140 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../font/Ubuntu-R.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../font/Ubuntu-RI.ttf);
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../font/Ubuntu-B.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url(../font/Ubuntu-BI.ttf);
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ubuntumono';
+  src: url(../font/UbuntuMono-R.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ubuntumono';
+  src: url(../font/UbuntuMono-RI.ttf);
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Ubuntumono';
+  src: url(../font/UbuntuMono-B.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Ubuntumono';
+  src: url(../font/UbuntuMono-BI.ttf);
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Kottaone';
+  src: url(../font/KottaOne-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "etherpad";
+  src:url("../font/etherpad.eot?v=2");
+  src:url("../font/etherpad.eot?#iefix&v=2") format("embedded-opentype"),
+  url("../font/etherpad.woff?v=2") format("woff"),
+  url("../font/etherpad.ttf?v=2") format("truetype"),
+  url("../font/etherpad.svg#etherpad?v=2") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "etherpad" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="ep-"]:before,
+[class*=" ep-"]:before {
+  font-family: "etherpad" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ep-bold:before {
+  content: "\62";
+}
+.ep-italic:before {
+  content: "\69";
+}
+.ep-underline:before {
+  content: "\75";
+}
+.ep-highlight:before {
+  content: "\68";
+}
+.ep-ul:before {
+  content: "\6c";
+}
+.ep-ol:before {
+  content: "\6f";
+}
+.ep-decrease-indent:before {
+  content: "\64";
+}
+.ep-increase-indent:before {
+  content: "\6e";
+}
+.ep-check-3:before {
+  content: "\61";
+}
+
+.menu_left .icon {
+  display: inline-block;
+  clear: both;
+  font-size: 32px;
+  margin: 8px 8px 0;
+}
+.menu_left li,
+.menu_left li label {
+  cursor: pointer;
+}
+.menu_left li:hover {
+  color: #D82135;
+}
+
 *,
 html,
 body,
@@ -14,7 +151,7 @@ html {
 }
 body,
 textarea {
-  font-family: Helvetica, Arial, sans-serif
+  font-family: Ubuntu, sans-serif
 }
 iframe {
   position: absolute
@@ -45,32 +182,22 @@ a img {
 }
 /* menu */
 .toolbar {
-  background: #f7f7f7;
-  background: -webkit-linear-gradient(#f7f7f7, #f1f1f1 80%);
-  background: -moz-linear-gradient(#f7f7f7, #f1f1f1 80%);
-  background: -o-linear-gradient(#f7f7f7, #f1f1f1 80%);
-  background: -ms-linear-gradient(#f7f7f7, #f1f1f1 80%);
-  background: linear-gradient(#f7f7f7, #f1f1f1 80%);
-  border-bottom: 1px solid #ccc;
   overflow: hidden;
-  padding-top: 4px;
-  width: 100%;
-  white-space: nowrap;
-  height: 32px;
+  width: 48px;
+  /*white-space: nowrap;*/
 }
 .toolbar ul {
   position: absolute;
   list-style: none;
-  padding-right: 3px;
-  padding-left: 1px;
   z-index: 2;
   overflow: hidden;
-  float: left
+  float: left;
+  margin-top: 30px;
 }
 .toolbar ul li {
   float: left;
-  margin-left: 2px;
-  height:32px;
+  margin-right: 2px;
+  /*height:32px;*/
 }
 .toolbar ul li.separator {
   border: inherit;
@@ -84,15 +211,15 @@ a img {
   text-decoration: none;
 }
 .toolbar ul li a:hover {
-  background: #fff;
+  /*background: #fff;
   background: -webkit-linear-gradient(#f4f4f4, #e4e4e4);
   background: -moz-linear-gradient(#f4f4f4, #e4e4e4);
   background: -o-linear-gradient(#f4f4f4, #e4e4e4);
   background: -ms-linear-gradient(#f4f4f4, #e4e4e4);
-  background: linear-gradient(#f4f4f4, #e4e4e4);
+  background: linear-gradient(#f4f4f4, #e4e4e4);*/
 }
 .toolbar ul li a:active {
-  background: #eee;
+  /*background: #eee;
   background: -webkit-linear-gradient(#ddd, #fff);
   background: -moz-linear-gradient(#ddd, #fff);
   background: -o-linear-gradient(#ddd, #fff);
@@ -100,10 +227,10 @@ a img {
   background: linear-gradient(#ddd, #fff);
   -webkit-box-shadow: 0 0 8px rgba(0,0,0,.1) inset;
   -moz-box-shadow: 0 0 8px rgba(0,0,0,.1) inset;
-  box-shadow: 0 0 8px rgba(0,0,0,.1) inset;
+  box-shadow: 0 0 8px rgba(0,0,0,.1) inset;*/
 }
 .toolbar ul li .activeButton {
-  background: #eee;
+  /*background: #eee;
   background: -webkit-linear-gradient(#ddd, #fff);
   background: -moz-linear-gradient(#ddd, #fff);
   background: -o-linear-gradient(#ddd, #fff);
@@ -111,26 +238,26 @@ a img {
   background: linear-gradient(#ddd, #fff);
   -webkit-box-shadow: 0 0 8px rgba(0,0,0,.1) inset;
   -moz-box-shadow: 0 0 8px rgba(0,0,0,.1) inset;
-  box-shadow: 0 0 8px rgba(0,0,0,.1) inset;
+  box-shadow: 0 0 8px rgba(0,0,0,.1) inset;*/
 }
 .toolbar ul li a {
-  background: #fff;
+  /*background: #fff;
   background: -webkit-linear-gradient(#fff, #f0f0f0);
   background: -moz-linear-gradient(#fff, #f0f0f0);
   background: -o-linear-gradient(#fff, #f0f0f0);
   background: -ms-linear-gradient(#fff, #f0f0f0);
   background: linear-gradient(#fff, #f0f0f0);
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 3px;*/
   color: #ccc;
   cursor: pointer;
   display: inline-block;
-  min-height: 18px;
+  /*min-height: 18px;*/
   overflow: hidden;
-  padding: 4px 5px;
+  /*padding: 4px 5px;*/
   text-align: center;
   text-decoration: none;
-  min-width: 18px;
+  /*min-width: 18px;*/
 }
 .toolbar ul li a .buttonicon {
   position: relative;
@@ -187,7 +314,8 @@ a img {
 }
 .toolbar ul.menu_left {
   left:0px;
-  right:250px;
+  width: 60px;
+  overflow: hidden;
 }
 
 .toolbar ul.menu_right {
@@ -211,7 +339,7 @@ li[data-key=showusers] > a #online_count {
 
 #editorcontainer {
   position: absolute;
-  top: 37px; /* + 1px border */
+  top: 0px !important; /* + 1px border */
   left: 0px;
   right: 0px;
   bottom: 0px;
@@ -290,7 +418,9 @@ li[data-key=showusers] > a #online_count {
   position: absolute;
   bottom: 0;
   top: 0;
-  width: 100%;
+  left: 58px;
+  width: calc(100% - 60px);
+  border: 1px solid #a0a0a0;
 }
 #padpage {
   position: absolute;
@@ -556,7 +686,7 @@ table#otheruserstable {
   padding-bottom: 10px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  display: none;
+  display: none !important;
 }
 #chattext {
   background-color: white;
@@ -625,6 +755,7 @@ table#otheruserstable {
   border-top-right-radius: 5px;
   background-color: #fff;
   cursor: pointer;
+  display: none;
 }
 #chaticon a {
   text-decoration: none
@@ -760,45 +891,58 @@ table#otheruserstable {
   border: none;
   padding: 0;
   background: none;
-  font-family: "fontawesome-etherpad";
-  font-size: 15px;
+  font-family: "etherpad";
+  font-size: 14px;
   font-style: normal;
   font-weight: normal;
-  color: #666;
+  color: #000;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .buttonicon::-moz-focus-inner {
   padding: 0;
   border: 0
 }
-
+.menu_left li[data-key="insertorderedlist"],
+.menu_left li[data-key="indent"] {
+  clear: both;
+}
+.menu_left li[data-key="insertorderedlist"] .buttonicon,
+.menu_left li[data-key="insertunorderedlist"] .buttonicon,
+.menu_left li[data-key="indent"] .buttonicon,
+.menu_left li[data-key="outdent"] .buttonicon {
+  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  margin-right: 4px;
+}
 .buttonicon:focus{
-  border: 1px solid #666;
+  /*border: 1px solid #666;*/
 }
 .buttonicon-bold:before {
-  content: "\e81c";
+  content: "b";
 }
 .buttonicon-italic:before {
-  content: "\e81d";
+  content: "i";
 }
 .buttonicon-underline:before {
-  content: "\e817";
+  content: "u";
 }
 .buttonicon-strikethrough:before {
   content: "\e818";
 }
 .buttonicon-insertorderedlist:before {
-  content: "\e816";
+  content: "o";
 }
 .buttonicon-insertunorderedlist:before {
-  content: "\e815";
+  content: "l";
 }
 .buttonicon-indent:before {
-  content: "\e814";
+  content: "n";
 }
 .buttonicon-outdent:before {
-  content: "\e813";
+  content: "d";
 }
 .buttonicon-undo:before {
   content: "\e823";
@@ -976,12 +1120,8 @@ input[type=checkbox] {
   .toolbar ul li.separator {
     display: none;
   }
-  .toolbar ul li a {
-    padding: 4px 1px
-  }
   .toolbar ul.menu_left {
     left:0px;
-    right:150px;
   }
 }
 @media all and (max-width: 400px){
@@ -1067,12 +1207,6 @@ input[type=checkbox] {
       border-bottom: 0;
     }
     .toolbar ul {
-      background: #f7f7f7;
-      background: -webkit-linear-gradient(#f7f7f7, #f1f1f1 80%);
-      background: -moz-linear-gradient(#f7f7f7, #f1f1f1 80%);
-      background: -o-linear-gradient(#f7f7f7, #f1f1f1 80%);
-      background: -ms-linear-gradient(#f7f7f7, #f1f1f1 80%);
-      background: linear-gradient(#f7f7f7, #f1f1f1 80%);
       width: 100%;
       overflow: hidden;
     }
@@ -1081,7 +1215,6 @@ input[type=checkbox] {
       position: fixed;
       top: 0;
       padding-top: 4px;
-      border-bottom: 1px solid #ccc;
       z-index: 10;
     }
     .toolbar ul.menu_right {
@@ -1262,11 +1395,11 @@ input[type=checkbox] {
 
 @font-face {
   font-family: "fontawesome-etherpad";
-  src:url("../../static/font/fontawesome-etherpad.eot");
-  src:url("../../static/font/fontawesome-etherpad.eot?#iefix") format("embedded-opentype"),
-    url("../../static/font/fontawesome-etherpad.woff") format("woff"),
-    url("../../static/font/fontawesome-etherpad.ttf") format("truetype"),
-    url("../../static/font/fontawesome-etherpad.svg#fontawesome-etherpad") format("svg");
+  src:url("../static/font/fontawesome-etherpad.eot");
+  src:url("../static/font/fontawesome-etherpad.eot?#iefix") format("embedded-opentype"),
+    url("../static/font/fontawesome-etherpad.woff") format("woff"),
+    url("../static/font/fontawesome-etherpad.ttf") format("truetype"),
+    url("../static/font/fontawesome-etherpad.svg#fontawesome-etherpad") format("svg");
   font-weight: normal;
   font-style: normal;
 
@@ -1304,5 +1437,95 @@ input[type=checkbox] {
 .hideControlsEditbar{
   display:none !important;
 }
-
-
+#font-size,
+#font-family,
+#font-color,
+#headings {
+  display: none;
+}
+.button-color {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  border-radius: 50%;
+}
+.button-color-black {
+  background-color: #000;
+}
+.button-color-red {
+  background-color: #f44336;
+}
+.button-color-green {
+  background-color: #4caf50;
+}
+.button-color-blue {
+  background-color: #3f51b5;
+}
+.button-fontsize {
+  font-family: Ubuntu, sans-serif;
+  line-height: 22px;
+  height: auto;
+  margin: 10px 0;
+}
+.button-fontsize-12 {
+  font-size: 14px;
+  padding-top: 4px;
+}
+.button-fontsize-16 {
+  font-size: 18px;
+  padding-top: 2px;
+}
+.button-fontsize-20 {
+  font-size: 22px;
+}
+.button-fontfamily {
+  font-size: 20px;
+  height: auto;
+  margin-bottom: 5px;
+}
+.button-fontfamily-ubuntumono {
+  font-family: Ubuntumono, monospace;
+}
+.button-fontfamily-kottaone {
+  font-family: Kottaone, serif;
+  padding-top: 1px;
+}
+.button-fontfamily-ubuntu {
+  font-family: Ubuntu, sans-serif;
+}
+.button-header,
+.button-toc {
+  font-size: 24px;
+  font-family: Ubuntu, sans-serif;
+  width: 24px;
+  height: auto;
+  margin: 0 0 0 4px;
+}
+.button-header {
+  margin-top: -6px;
+}
+.button-toc {
+  font-size: 18px;
+}
+.buttonicon-tasklist {
+  background-image: none !important;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  margin-left: 17px;
+}
+.buttonicon-tasklist:before {
+  content: "\61";
+}
+.mt-9 {
+  margin-top: 9px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.buttonicon:hover {
+  color: #D82135;
+}
+#innerdocbody span {
+  padding-top: 0 !important;
+}

@@ -3,8 +3,7 @@
 		"authors": [
 			"Eliovir",
 			"Mschmitt",
-			"Objectivesea",
-			"Robin van der Vliet"
+			"Objectivesea"
 		]
 	},
 	"index.newPad": "Nova Teksto",
@@ -121,7 +120,7 @@
 	"pad.userlist.approve": "Aprobi",
 	"pad.editbar.clearcolors": "Forigi kolorojn de aŭtoreco en la tuta dokumento?",
 	"pad.impexp.importbutton": "Enporti Nun",
-	"pad.impexp.importing": "Enportante...",
+	"pad.impexp.importing": "Enportanta...",
 	"pad.impexp.confirmimport": "Enporti dosieron superskribos la nunan tekston en la redaktilo. Ĉu vi certe volas daŭrigi?",
 	"pad.impexp.convertFailed": "Ni ne kapablis enporti tiun dosieron. Bonvolu uzi alian dokumentformaton aŭ permane kopii kaj alglui.",
 	"pad.impexp.padHasData": "Ni ne kapablis enporti tiun dosieron ĉar la teksto jam estas ŝanĝita. Bonvolu enporti en novan tekston.",

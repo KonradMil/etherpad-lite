@@ -78,9 +78,8 @@ exports.doExport = function(req, res, padId, type)
       {
         exporttxt.getPadTXTDocument(padId, req.params.rev, function(err, txt)
         {
-          if(!err) {
-            res.send(txt);
-          }
+          if(ERR(err)) return;
+          res.send(txt);
         });
       }
       else

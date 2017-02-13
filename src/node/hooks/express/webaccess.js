@@ -116,11 +116,11 @@ exports.expressConfigure = function (hook_name, args, cb) {
 
   if (!exports.sessionStore) {
     exports.sessionStore = new ueberStore();
-    exports.secret = settings.sessionKey;
+    exports.secret = settings.sessionKey; // Isn't this being reset each time the server spawns?
   }
 
   args.app.sessionStore = exports.sessionStore;
-  args.app.use(sessionModule({secret: exports.secret, store: args.app.sessionStore, resave: true, saveUninitialized: true, name: 'express_sid', proxy: true, cookie: { secure: !!settings.ssl }}));
+  args.app.use(sessionModule({secret: exports.secret, store: args.app.sessionStore, resave: true, saveUninitialized: true, name: 'express_sid' }));
 
   args.app.use(cookieParser(settings.sessionKey, {}));
 

@@ -21,6 +21,7 @@
  */
 
 /* global $, window */
+document.domain = 'kmilewski.eu';
 
 var socket;
 

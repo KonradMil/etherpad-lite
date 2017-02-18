@@ -24,7 +24,7 @@ exports.tasklist = {
   init: function(context){ // Write the button to the dom
     var buttonHTML = '<li class="acl-write" id="tasklist"><a class="grouped-middle" data-l10n-id="pad.toolbar.tasklist.title" title="Task list Checkbox"><span class="buttonicon buttonicon-tasklist"></span></a></li>';
     //$(buttonHTML).insertBefore($('.buttonicon-indent').parent().parent());
-    $(buttonHTML).before('.button-color-black');
+    $('.button-color-black').before(buttonHTML);
     $('#tasklist').click(function(){ // apply attribtes when we click the editbar button
 
       context.ace.callWithAce(function(ace){ // call the function to apply the attribute inside ACE

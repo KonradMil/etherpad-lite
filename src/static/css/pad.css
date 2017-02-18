@@ -126,6 +126,7 @@
   clear: both;
   font-size: 32px;
   margin: 8px 8px 0;
+  margin-top: 0px;
 }
 .menu_left li,
 .menu_left li label {
@@ -434,7 +435,7 @@ li[data-key=showusers] > a #online_count {
   top: 0;
   left: 58px;
   width: calc(100% - 60px);
-  border: 1px solid #a0a0a0;
+  border: 0;
 }
 #padpage {
   position: absolute;
@@ -1554,8 +1555,23 @@ input[type=checkbox] {
 
 .first_line, .second_line {
   align-items: baseline;
+  border-bottom: 2px solid #f3f3f3;
+}
+
+.second_line {
+  align-items: center;
+  padding-top: 6px;
 }
 
 li[data-type='button'] button {
   margin-bottom: 10px;
+}
+
+.but_share, .but_upload {
+  padding-left: 0px;
+}
+
+ul.menu_left {
+  padding-left: 10px;
+  padding-right: 10px;
 }

@@ -64,13 +64,13 @@
 
             <ul class="menu_left" role="toolbar" data-version="0.1">
                 <div class="first_line">
-                    <% e.begin_block("editbarMenuLeft"); %>
-                    <%- toolbar.menu(settings.toolbar.left, isReadOnly) %>
-                    <% e.end_block(); %>
                     <li class="clear"><button class="buttonicon button-color button-color-black" data-id="0" title="Czarny"></button></li>
                     <li><button class="buttonicon button-color button-color-red" data-id="1" title="Czerwony"></button></li>
                     <li class="clear"><button class="buttonicon button-color button-color-green" data-id="2" title="Zielony"></button></li>
                     <li><button class="buttonicon button-color button-color-blue" data-id="3" title="Niebieski"></button></li>
+                    <% e.begin_block("editbarMenuLeft"); %>
+                    <%- toolbar.menu(settings.toolbar.left, isReadOnly) %>
+                    <% e.end_block(); %>
                     <li class="clear mt-9"><label for="options-toc" class="button-toc" title="Spis treści">TC</label></li>
                     <li class="mt-10"><button class="buttonicon button-header" title="Nagłówek">H</button></li>
                     <li class="clear"><button class="buttonicon button-fontsize button-fontsize-12" data-id="fs12" title="Rozmiar mały">T</button></li>

@@ -1540,3 +1540,7 @@ input[type=checkbox] {
 #innerdocbody span {
   padding-top: 0 !important;
 }
+
+.acl-write.font-color-icon.ep_font_color, #font-color, #headings, .separator.acl-write, .separator {
+  display: none;
+}

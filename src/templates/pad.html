@@ -62,22 +62,26 @@
             </div>
 
             <ul class="menu_left" role="toolbar">
-                <% e.begin_block("editbarMenuLeft"); %>
-                <%- toolbar.menu(settings.toolbar.left, isReadOnly) %>
-                <% e.end_block(); %>
-                <li class="clear"><button class="buttonicon button-color button-color-black" data-id="0" title="Czarny"></button></li>
-                <li><button class="buttonicon button-color button-color-red" data-id="1" title="Czerwony"></button></li>
-                <li class="clear"><button class="buttonicon button-color button-color-green" data-id="2" title="Zielony"></button></li>
-                <li><button class="buttonicon button-color button-color-blue" data-id="3" title="Niebieski"></button></li>
-                <li class="clear mt-9"><label for="options-toc" class="button-toc" title="Spis treści">TC</label></li>
-                <li class="mt-10"><button class="buttonicon button-header" title="Nagłówek">H</button></li>
-                <li class="clear"><button class="buttonicon button-fontsize button-fontsize-12" data-id="fs12" title="Rozmiar mały">T</button></li>
-                <li><button class="buttonicon button-fontsize button-fontsize-16" data-id="fs16" title="Rozmiar średni">T</button></li>
-                <li><button class="buttonicon button-fontsize button-fontsize-20" data-id="fs20" title="Rozmiar duży">T</button></li>
-                <li class="clear"><button class="buttonicon button-fontfamily button-fontfamily-ubuntu" data-id="fontubuntu" title="Styl bezszeryfowy">a</button></li>
-                <li><button class="buttonicon button-fontfamily button-fontfamily-kottaone" data-id="fontkottaone" title="Styl szeryfowy">a</button></li>
-                <li><button class="buttonicon button-fontfamily button-fontfamily-ubuntumono" data-id="fontubuntumono" title="Styl o stałej szerokości">a</button></li>
-                <li class="icon"><label for="options-colorscheck" title="Podświetlenie udziałów"><i class="ep-highlight"></i></label></li>
+                <div class="first_line">
+                    <% e.begin_block("editbarMenuLeft"); %>
+                    <%- toolbar.menu(settings.toolbar.left, isReadOnly) %>
+                    <% e.end_block(); %>
+                    <li class="clear"><button class="buttonicon button-color button-color-black" data-id="0" title="Czarny"></button></li>
+                    <li><button class="buttonicon button-color button-color-red" data-id="1" title="Czerwony"></button></li>
+                    <li class="clear"><button class="buttonicon button-color button-color-green" data-id="2" title="Zielony"></button></li>
+                    <li><button class="buttonicon button-color button-color-blue" data-id="3" title="Niebieski"></button></li>
+                    <li class="clear mt-9"><label for="options-toc" class="button-toc" title="Spis treści">TC</label></li>
+                    <li class="mt-10"><button class="buttonicon button-header" title="Nagłówek">H</button></li>
+                    <li class="clear"><button class="buttonicon button-fontsize button-fontsize-12" data-id="fs12" title="Rozmiar mały">T</button></li>
+                    <li><button class="buttonicon button-fontsize button-fontsize-16" data-id="fs16" title="Rozmiar średni">T</button></li>
+                    <li><button class="buttonicon button-fontsize button-fontsize-20" data-id="fs20" title="Rozmiar duży">T</button></li>
+                    <li class="clear"><button class="buttonicon button-fontfamily button-fontfamily-ubuntu" data-id="fontubuntu" title="Styl bezszeryfowy">a</button></li>
+                    <li><button class="buttonicon button-fontfamily button-fontfamily-kottaone" data-id="fontkottaone" title="Styl szeryfowy">a</button></li>
+                    <li><button class="buttonicon button-fontfamily button-fontfamily-ubuntumono" data-id="fontubuntumono" title="Styl o stałej szerokości">a</button></li>
+                </div>
+                <div class="second_line">
+                    <li class="icon"><label for="options-colorscheck" title="Podświetlenie udziałów"><i class="ep-highlight"></i></label></li>
+                </div>
             </ul>
             <ul class="menu_right" role="toolbar">
                 <% e.begin_block("editbarMenuRight"); %>

@@ -316,6 +316,9 @@ a img {
   left:0px;
   width: 60px;
   overflow: hidden;
+  width: 100%;
+  overflow-x: scroll;
+  margin-top: 5px;
 }
 
 .toolbar ul.menu_right {
@@ -335,6 +338,13 @@ li[data-key=showusers] > a #online_count {
 }
 #editbar{
   display:none;
+  width: 100%;
+}
+
+.first_line, .second_line {
+  width: 100%;
+  height: 31px;
+  display: flex;
 }
 
 #editorcontainer {

@@ -1555,7 +1555,7 @@ input[type=checkbox] {
 
 .first_line, .second_line {
   align-items: baseline;
-  border-bottom: 2px solid #f3f3f3;
+  border-bottom: 4px solid #f3f3f3;
 }
 
 .second_line {

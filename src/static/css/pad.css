@@ -321,7 +321,7 @@ a img {
   overflow: hidden;
   width: 100%;
   overflow-x: scroll;
-  margin-top: 5px;
+  margin-top: 0px;
 
 }
 
@@ -1546,4 +1546,16 @@ input[type=checkbox] {
 
 .acl-write.font-color-icon.ep_font_color, #font-color, #headings, .separator.acl-write, .separator {
   display: none;
+}
+
+.menu_left .icon {
+  display: flex;
+}
+
+.first_line, .second_line {
+  align-items: baseline;
+}
+
+li[data-type='button'] button {
+  margin-bottom: 10px;
 }

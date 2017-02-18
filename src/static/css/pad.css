@@ -1556,6 +1556,9 @@ input[type=checkbox] {
 .first_line, .second_line {
   align-items: baseline;
   border-bottom: 4px solid #f3f3f3;
+  padding-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .second_line {
@@ -1571,7 +1574,5 @@ li[data-type='button'] button {
   padding-left: 0px;
 }
 
-ul.menu_left {
-  padding-left: 10px;
-  padding-right: 10px;
-}
+.cf:before, .cf:after { content: " "; display: table; }
+.cf:after { clear: both; }

@@ -197,6 +197,9 @@ a img {
 .toolbar ul li {
   float: left;
   margin-right: 2px;
+  width: 30px;
+  display: flex;
+  align-items: flex-start;
   /*height:32px;*/
 }
 .toolbar ul li.separator {

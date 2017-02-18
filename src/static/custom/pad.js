@@ -26,11 +26,5 @@ function customStart() {
 	$('.button-color').on('click', function () {
 		$('#font-color').find('select').val($(this).data('id')).trigger('change');
 	});
-    $('.acl-write.font-color-icon.ep_font_color').css('display', 'none');
-    $('#font-color').css('display', 'none');
-    $('#headings').css('display', 'none');
-    $('.separator.acl-write').css('display', 'none');
-    $('.separator').css('display', 'none');
-
 
 }

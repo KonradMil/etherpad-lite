@@ -1554,17 +1554,15 @@ input[type=checkbox] {
   display: flex;
 }
 
-.first_line, .second_line {
-  align-items: baseline;
+.menu_left {
   border-bottom: 4px solid #f3f3f3;
+}
+
+.first_line {
+  align-items: baseline;
   padding-bottom: 6px;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-.second_line {
-  align-items: center;
-  padding-top: 6px;
 }
 
 li[data-type='button'] button {

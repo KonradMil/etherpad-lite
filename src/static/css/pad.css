@@ -349,9 +349,9 @@ li[data-key=showusers] > a #online_count {
   width: 100%;
 }
 
-.first_line, .second_line {
+.first_line {
   width: 740px;
-  height: 31px;
+  height: 39px;
   display: flex;
 }
 
@@ -439,7 +439,7 @@ li[data-key=showusers] > a #online_count {
   /*left: 58px; */
   width: 100%;
   border: 0;
-  margin-top: 46px;
+  margin-top: 52px;
 }
 #padpage {
   position: absolute;

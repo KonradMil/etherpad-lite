@@ -201,6 +201,9 @@ a img {
   width: 30px;
   display: flex;
   align-items: flex-start;
+  height: 37px;
+  padding-left: 2px;
+  padding-right: 2px;
   /*height:32px;*/
 }
 .toolbar ul li.separator {

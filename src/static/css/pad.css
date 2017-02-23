@@ -350,7 +350,7 @@ li[data-key=showusers] > a #online_count {
 }
 
 .first_line {
-  width: 740px;
+  width: 840px;
   height: 39px;
   display: flex;
 }

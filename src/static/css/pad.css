@@ -1550,7 +1550,7 @@ input[type=checkbox] {
 }
 
 .acl-write.font-color-icon.ep_font_color, #font-color, #headings, .separator.acl-write, .separator {
-  display: none;
+  /*display: none;*/
 }
 
 .menu_left .icon {

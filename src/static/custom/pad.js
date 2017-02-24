@@ -18,13 +18,13 @@ function customStart() {
 			headerButtonBody.removeClass('active');
 	});*/
 	$('.button-fontsize').on('click', function () {
-		$('#font-size').find('select').val($(this).data('id')).trigger('change');
+		$('#font-size').find('select').val($(this).attr('data-id')).trigger('change');
 	});
 	$('.button-fontfamily').on('click', function () {
-		$('#font-family').find('select').val($(this).data('id')).trigger('change');
+		$('#font-family').find('select').val($(this).attr('data-id')).trigger('change');
 	});
 	$('.button-color').on('click', function () {
-		$('#font-color').find('select').val($(this).data('id')).trigger('change');
+		$('#font-color').find('select').val($(this).attr('data-id')).trigger('change');
 	});
 
 }

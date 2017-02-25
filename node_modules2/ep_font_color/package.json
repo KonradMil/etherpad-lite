@@ -1,0 +1,49 @@
+{
+  "description": "Apply colors to fonts",
+  "name": "ep_font_color",
+  "version": "0.0.11",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "John McLear",
+    "email": "john@mclear.co.uk"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JohnMcLear/ep_font_color.git"
+  },
+  "gitHead": "940420724d3fa5ce8518ec1005f06cd52919c163",
+  "bugs": {
+    "url": "https://github.com/JohnMcLear/ep_font_color/issues"
+  },
+  "homepage": "https://github.com/JohnMcLear/ep_font_color",
+  "_id": "ep_font_color@0.0.11",
+  "scripts": {},
+  "_shasum": "d4560e4d8cd5d722dd0d58cd9eec9555eaff0f71",
+  "_from": "ep_font_color@*",
+  "_npmVersion": "2.15.1",
+  "_nodeVersion": "4.4.4",
+  "_npmUser": {
+    "name": "johnyma22",
+    "email": "john@mclear.co.uk"
+  },
+  "dist": {
+    "shasum": "d4560e4d8cd5d722dd0d58cd9eec9555eaff0f71",
+    "tarball": "https://registry.npmjs.org/ep_font_color/-/ep_font_color-0.0.11.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "johnyma22",
+      "email": "john@mclear.co.uk"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ep_font_color-0.0.11.tgz_1463249318545_0.4782346999272704"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ep_font_color/-/ep_font_color-0.0.11.tgz"
+}

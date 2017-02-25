@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url(../font/Ubuntu-R.ttf);
+  src: url("../font/Ubuntu-R.ttf");
   font-weight: 400;
   font-style: normal;
 }
